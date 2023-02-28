@@ -1,10 +1,3 @@
-// src/config.ts
-var config = {
-  convertToReadableFieldNames: true,
-  ruleSeparator: "|"
-};
-var config_default = config;
-
 // src/utils.ts
 function empty(value) {
   if (value === null || value === void 0) {
@@ -71,6 +64,16 @@ function defineProperties(obj, properties) {
   }
   Object.defineProperties(obj, properties);
 }
+var utils = {
+  empty,
+  getValue,
+  getValueBetweenDots,
+  isPathInItems,
+  splitStringByCase,
+  convertToReadableFieldNames,
+  getCustomAttribute
+};
+var utils_default = utils;
 
 // src/rules.ts
 var rules = {
@@ -234,6 +237,13 @@ var rules = {
   }
 };
 var rules_default = rules;
+
+// src/config.ts
+var config = {
+  convertToReadableFieldNames: true,
+  ruleSeparator: "|"
+};
+var config_default = config;
 
 // src/messages.ts
 var messages = {
@@ -419,7 +429,9 @@ var sinoval = {
   setConfig,
   setRule,
   setMessage,
-  setAttribute
+  setAttribute,
+  rules: rules_default,
+  utils: utils_default
 };
 var src_default = sinoval;
 export {
