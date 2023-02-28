@@ -21,6 +21,9 @@
     ],
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
     "scripts": {
         "build": "rm -rf dist && tsc -d --emitDeclarationOnly src/index.ts --declarationDir dist && temon src/index.ts --build dist/index.js",
         "test": "vitest"
