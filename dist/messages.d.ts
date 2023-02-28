@@ -1,0 +1,20 @@
+declare const messages: {
+    invalid({ attribute }: import("./types").MessageParams): string;
+    required({ attribute }: import("./types").MessageParams): string;
+    required_if({ attribute }: import("./types").MessageParams): string;
+    required_unless({ attribute }: import("./types").MessageParams): string;
+    numeric({ attribute }: import("./types").MessageParams): string;
+    min({ attribute, value, args }: import("./types").MessageParams): string;
+    max({ attribute, value, args }: import("./types").MessageParams): string;
+    alpha({ attribute }: import("./types").MessageParams): string;
+    alpha_num({ attribute }: import("./types").MessageParams): string;
+    in({ attribute }: import("./types").MessageParams): string;
+    not_in({ attribute }: import("./types").MessageParams): string;
+    email({ attribute }: import("./types").MessageParams): string;
+    url({ attribute }: import("./types").MessageParams): string;
+    same({ attribute, args }: import("./types").MessageParams): string;
+    different({ attribute, args }: import("./types").MessageParams): string;
+    starts_with({ attribute, args }: import("./types").MessageParams): string;
+    ends_with({ attribute, args }: import("./types").MessageParams): string;
+};
+export default messages;
