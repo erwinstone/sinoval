@@ -23,6 +23,7 @@ declare const sinoval: {
         different({ value, data, args }: import("./types").RuleParams): boolean;
         starts_with({ value, args }: import("./types").RuleParams): boolean;
         ends_with({ value, args }: import("./types").RuleParams): boolean;
+        boolean({ value }: import("./types").RuleParams): boolean;
     };
     utils: {
         empty: typeof import("./utils").empty;

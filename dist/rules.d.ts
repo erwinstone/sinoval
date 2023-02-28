@@ -71,5 +71,10 @@ declare const rules: {
      * The field under validation must end with the given value or one of the given values (separated by comma).
      */
     ends_with({ value, args }: import("./types").RuleParams): boolean;
+    /**
+     * The field under validation must be a valid boolean representation.
+     * Accepted input are true, false, 1, 0, "1", and "0".
+     */
+    boolean({ value }: import("./types").RuleParams): boolean;
 };
 export default rules;

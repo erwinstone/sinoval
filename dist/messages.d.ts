@@ -16,5 +16,6 @@ declare const messages: {
     different({ attribute, args }: import("./types").MessageParams): string;
     starts_with({ attribute, args }: import("./types").MessageParams): string;
     ends_with({ attribute, args }: import("./types").MessageParams): string;
+    boolean({ attribute }: import("./types").MessageParams): string;
 };
 export default messages;

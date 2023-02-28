@@ -234,6 +234,23 @@ var rules = {
       }
     }
     return false;
+  },
+  /**
+   * The field under validation must be a valid boolean representation.
+   * Accepted input are true, false, 1, 0, "1", and "0".
+   */
+  boolean({ value }) {
+    const type = typeof value;
+    switch (type) {
+      case "boolean":
+        return true;
+      case "number":
+        return [0, 1].includes(value);
+      case "string":
+        return ["0", "1"].includes(value);
+      default:
+        return false;
+    }
   }
 };
 var rules_default = rules;
@@ -311,6 +328,9 @@ var messages = {
   ends_with({ attribute, args }) {
     const argv = args;
     return `The ${attribute} must end with ${argv.includes(",") ? `one of the following: ${argv.split(",").join(", ")}` : argv}.`;
+  },
+  boolean({ attribute }) {
+    return `The ${attribute} field must be true or false.`;
   }
 };
 var messages_default = messages;
