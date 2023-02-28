@@ -1,15 +1,18 @@
 # sinoval
 Sinoval (Simple Node.js Validator) is a simple and easy-to-use node.js validator.
+
 ## Features
 - Easy to use
 - Chaining validation rules
 - Customizable validation rules
 - Customizable error messages
 - Customizable attributes
+
 ## Installation
 ```bash
 npm install sinoval
 ```
+
 ## Usage/Examples
 ```javascript
 import sinoval from 'sinoval'
@@ -35,6 +38,7 @@ const data = {}
 
 const validator = await sinoval.validate(rules, data)
 ```
+
 ## Available rules
  - **required**
 
@@ -120,6 +124,12 @@ const validator = await sinoval.validate(rules, data)
 
     The field under validation must end with the given value or one of the given values (separated by comma).
 
+ - **boolean**
+
+    The field under validation must be a valid boolean representation.
+
+    Accepted input are true, false, 1, 0, "1", and "0".
+
 ## Custom rules
 ```javascript
 sinoval.setRule({
@@ -148,6 +158,7 @@ const rules = {
     file: 'archive',
 }
 ```
+
 ## Custom messages
 ```javascript
 sinoval.setMessage({
@@ -155,12 +166,14 @@ sinoval.setMessage({
     'email.required': 'We need to know your email address!',
 })
 ```
+
 ## Custom attributes
 ```javascript
 sinoval.setAttribute({
     zip: 'zip code',
 })
 ```
+
 ## Configuration
 ```javascript
 // Example
@@ -185,5 +198,6 @@ console.log(await sinoval.validate({ firstName: 'required&min:2'}, {}))
 //     },
 // }
 ```
+
 ## License
 [MIT](https://github.com/erwinstone/sinoval/blob/main/LICENSE)

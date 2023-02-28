@@ -174,5 +174,22 @@ const rules = {
         }
         return false
     },
+    /**
+     * The field under validation must be a valid boolean representation.
+     * Accepted input are true, false, 1, 0, "1", and "0".
+     */
+    boolean({ value }) {
+        const type = typeof value
+        switch (type) {
+            case 'boolean':
+                return true
+            case 'number':
+                return [0, 1].includes(value as number)
+            case 'string':
+                return ['0', '1'].includes(value as string)
+            default:
+                return false
+        }
+    },
 } satisfies Record<string, RuleFunction>
 export default rules

@@ -66,5 +66,8 @@ const messages = {
         const argv = args as string
         return `The ${attribute} must end with ${argv.includes(',') ? `one of the following: ${argv.split(',').join(', ')}` : argv}.`
     },
+    boolean({ attribute }) {
+        return `The ${attribute} field must be true or false.`
+    },
 } satisfies Record<string, MessageFunction>
 export default messages
