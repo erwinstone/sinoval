@@ -35,6 +35,91 @@ const data = {}
 
 const validator = await sinoval.validate(rules, data)
 ```
+## Available rules
+ - required
+
+    The field under validation must be present in the input data and not empty. A field is "empty" if it meets one of the following criteria:
+    - The value is null or undefined
+    - An empty string ('')
+    - An empty array ([])
+    - An empty object ({}).
+
+ - required_if:anotherfield,value
+
+    The field under validation must be present and not empty if the anotherfield field is equal to any value. Example:
+
+    `location: 'required_if:attendanceType,in-person'`
+
+ - required_unless:anotherfield,value
+
+    The field under validation must be present and not empty unless the anotherfield field is equal to any value. Example:
+
+    `location: 'required_unless:attendance_type,online'`
+
+ - numeric
+
+    The field under validation must be a number or a numeric string.
+
+ - min:value
+
+    The field under validation must have a minimum value.
+
+    For string data, value corresponds to the number of characters.
+
+    For numeric data, value corresponds to a given integer value.
+
+    For an array, size corresponds to the `length` of the array.
+
+ - max:value
+
+    The field under validation must be less than or equal to a maximum value.
+
+    For string data, value corresponds to the number of characters.
+
+    For numeric data, value corresponds to a given integer value.
+
+    For an array, size corresponds to the `length` of the array.
+
+ - alpha
+
+    The field under this rule must be entirely alphabetic characters.
+
+ - alpha_num
+
+    The field under this rule must be entirely alpha-numeric characters.
+
+ - in:value1,value2
+
+    The field under validation must be included in the given list of values.
+
+ - not_in:value1,value2
+
+    The field under validation must not be included in the given list of values.
+
+ - email
+
+    The field under validation must be formatted as an email address.
+
+ - url
+
+    The field under validation must be a valid URL.
+
+ - same:anotherfield
+
+    The given field must match the field under validation.
+
+ - different:anotherfield
+
+    The field under validation must have a different value than field.
+
+ - starts_with:value1,value2
+
+    The field under validation must start with the given value or one of the given values (separated by comma).
+
+ - ends_with:value1,value2
+
+    The field under validation must end with the given value or one of the given values (separated by comma).
+
 ## Custom rules
 ```javascript
 sinoval.setRule({
