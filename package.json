@@ -1,7 +1,7 @@
 {
     "name": "sinoval",
     "type": "module",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "A simple and easy-to-use node.js validator",
     "author": "Erwin Stone <erwinstone@pm.me>",
     "license": "MIT",
@@ -13,6 +13,7 @@
     "keywords": [
         "validator",
         "validation",
+        "node validator",
         "laravel validator",
         "simple validator",
         "express validator",
@@ -25,7 +26,8 @@
         "dist"
     ],
     "scripts": {
-        "build": "rm -rf dist && tsc -d --emitDeclarationOnly src/index.ts --declarationDir dist && temon src/index.ts --build dist/index.js",
+        "build": "rm -rf dist && tsc -d --emitDeclarationOnly src/index.ts --declarationDir dist && temon src/index.ts --build dist/index.js --minify",
+        "lint": "eslint src",
         "test": "vitest"
     },
     "devDependencies": {

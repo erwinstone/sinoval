@@ -103,6 +103,7 @@ export default async function validate<D extends Data>(rules: Rules, data: D) {
                             attribute: getCustomAttribute(path, attributes) || (config.convertToReadableFieldNames ? config.convertToReadableFieldNamesFunction(path) : path),
                             value,
                             args: ruleArgs,
+                            data,
                         })
                 }
             }

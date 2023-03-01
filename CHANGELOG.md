@@ -1,3 +1,7 @@
+v1.0.5
+ - Expose "data" to message params
+ - Minify "index.js"
+
 v1.0.4
  - Add configuration "convertToReadableFieldNamesFunction"
 

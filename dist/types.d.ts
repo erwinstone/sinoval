@@ -5,14 +5,15 @@ export interface Items {
 }
 export interface RuleParams {
     value: unknown;
-    data: Record<string, unknown>;
+    data: Data;
     args?: unknown;
 }
 export type RuleFunction = (params: RuleParams) => Promise<boolean> | boolean;
 export interface MessageParams {
-    attribute: string;
     value: unknown;
+    data: Data;
     args?: unknown;
+    attribute: string;
 }
 export type MessageFunction = string | ((params: MessageParams) => Promise<string> | string);
 export interface ValidatorConfig {
