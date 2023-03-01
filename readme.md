@@ -23,7 +23,7 @@ const rules = {
     'phone_number': 'starts_with:+62,08',
     'password': 'required|min:6',
     'password_confirmation': 'required|same:password',
-    'shipping.method': 'required|is_in:regular,express',
+    'shipping.method': 'required|in:regular,express',
     'shipping.address': 'required',
     'product.*.name': 'required',
     'product.*.qty': 'required|numeric|max:10',
