@@ -18,6 +18,7 @@ export type MessageFunction = string | ((params: MessageParams) => Promise<strin
 export interface ValidatorConfig {
     convertToReadableFieldNames: boolean
     ruleSeparator: string
+    convertToReadableFieldNamesFunction: (fieldName: any) => string
 }
 export type Rules = Record<string, string>
 export type Data = Record<string, any>

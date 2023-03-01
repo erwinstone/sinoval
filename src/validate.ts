@@ -3,7 +3,7 @@ import config from './config'
 import rules from './rules'
 import messages from './messages'
 import attributes from './attributes'
-import { convertToReadableFieldNames as convertField, defineProperties, empty, getCustomAttribute, getValue, getValueBetweenDots, isPathInItems } from './utils'
+import { defineProperties, empty, getCustomAttribute, getValue, getValueBetweenDots, isPathInItems } from './utils'
 import type { Data, Items, MessageFunction, RuleFunction, Rules, ValidatorConfig } from './types'
 export const setConfig = (customConfigs: Partial<ValidatorConfig>) => {
     defineProperties(config, customConfigs)
@@ -100,7 +100,7 @@ export default async function validate<D extends Data>(rules: Rules, data: D) {
                     errors[path] = typeof getMessage === 'string'
                         ? getMessage
                         : await getMessage({
-                            attribute: getCustomAttribute(path, attributes) || (config.convertToReadableFieldNames ? convertField(path) : path),
+                            attribute: getCustomAttribute(path, attributes) || (config.convertToReadableFieldNames ? config.convertToReadableFieldNamesFunction(path) : path),
                             value,
                             args: ruleArgs,
                         })

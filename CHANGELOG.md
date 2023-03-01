@@ -1,3 +1,6 @@
+v1.0.4
+ - Add configuration "convertToReadableFieldNamesFunction"
+
 v1.0.3
  - Add "boolean" rule
  - Add CHANGELOG.md

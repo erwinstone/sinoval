@@ -258,6 +258,7 @@ var rules_default = rules;
 // src/config.ts
 var config = {
   convertToReadableFieldNames: true,
+  convertToReadableFieldNamesFunction: convertToReadableFieldNames,
   ruleSeparator: "|"
 };
 var config_default = config;
@@ -431,7 +432,7 @@ async function validate(rules2, data) {
             getMessage = messages_default[ruleName];
           }
           errors[path] = typeof getMessage === "string" ? getMessage : await getMessage({
-            attribute: getCustomAttribute(path, attributes_default) || (config_default.convertToReadableFieldNames ? convertToReadableFieldNames(path) : path),
+            attribute: getCustomAttribute(path, attributes_default) || (config_default.convertToReadableFieldNames ? config_default.convertToReadableFieldNamesFunction(path) : path),
             value,
             args: ruleArgs
           });

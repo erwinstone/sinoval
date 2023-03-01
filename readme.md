@@ -197,6 +197,17 @@ console.log(await sinoval.validate({ firstName: 'required&min:2'}, {}))
 //         firstName: 'The firstName field is required.'
 //     },
 // }
+sinoval.setConfig({
+    convertToReadableFieldNamesFunction: fieldName => fieldName.toUpperCase(),
+})
+console.log(await sinoval.validate({ firstName: 'required|min:2'}, {}))
+// Will produce:
+// {
+//     ...
+//     errors: {
+//         firstName: 'The FIRSTNAME field is required.'
+//     },
+// }
 ```
 
 ## License
