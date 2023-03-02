@@ -150,7 +150,6 @@ sinoval.setRule({
         }
         return false
     },
-    exist: async ({ value })
 })
 const rules = {
     username: 'required|exists:users,username',

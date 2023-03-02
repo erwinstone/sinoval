@@ -1,3 +1,6 @@
+v1.0.6
+ - Fix readme
+
 v1.0.5
  - Expose "data" to message params
  - Minify "index.js"
