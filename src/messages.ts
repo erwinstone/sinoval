@@ -17,7 +17,7 @@ const messages = {
         return `The ${attribute} field must be a number.`
     },
     min({ attribute, value, args }) {
-        if (rules.numeric({ value, data: {} })) {
+        if (rules.numeric({ value, data: {} }).pass) {
             return `The ${attribute} field must be at least ${args}.`
         }
         if (Array.isArray(value)) {
@@ -26,7 +26,7 @@ const messages = {
         return `The ${attribute} field must be at least ${args} characters.`
     },
     max({ attribute, value, args }) {
-        if (rules.numeric({ value, data: {} })) {
+        if (rules.numeric({ value, data: {} }).pass) {
             return `The ${attribute} field must not be greater than ${args}.`
         }
         if (Array.isArray(value)) {

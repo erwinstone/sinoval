@@ -2,15 +2,19 @@ import { expect, test } from 'vitest'
 import type { Rules } from '../../src/index'
 import sinoval from '../../src/index'
 sinoval.setRule({
-    uppercase: ({ value }) => value === (value as string).toUpperCase(),
+    uppercase: ({ value }) => {
+        return {
+            pass: value === (value as string).toUpperCase(),
+        }
+    },
     archive: ({ value }) => {
         const extensions = ['.7z', '.rar', '.tar.gz', '.zip']
         for (const ext of extensions) {
             if ((value as string).endsWith(ext)) {
-                return true
+                return { pass: true }
             }
         }
-        return false
+        return { pass: false }
     },
 })
 const rules: Rules = {

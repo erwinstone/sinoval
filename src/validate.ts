@@ -4,7 +4,7 @@ import rules from './rules'
 import messages from './messages'
 import attributes from './attributes'
 import { defineProperties, empty, getCustomAttribute, getValue, getValueBetweenDots, isPathInItems } from './utils'
-import type { Data, Items, MessageFunction, RuleFunction, Rules, ValidatorConfig } from './types'
+import type { Data, Items, MessageFunction, RuleFunction, RuleReturn, Rules, ValidatorConfig } from './types'
 export const setConfig = (customConfigs: Partial<ValidatorConfig>) => {
     defineProperties(config, customConfigs)
 }
@@ -73,9 +73,9 @@ export default async function validate<D extends Data>(rules: Rules, data: D) {
         for (const rule of rules.split(config.ruleSeparator)) {
             const [ruleName, ruleArgs] = rule.split(':')
             if (!(path in errors) && ruleName in validator) {
-                let valid = false
+                let valid: RuleReturn = { pass: false }
                 if (!ruleName.startsWith('required') && empty(value)) {
-                    valid = true
+                    valid = { pass: true }
                 }
                 else {
                     valid = await validator[ruleName]({
@@ -84,7 +84,7 @@ export default async function validate<D extends Data>(rules: Rules, data: D) {
                         args: ruleArgs,
                     })
                 }
-                if (!valid) {
+                if (!valid.pass) {
                     let getMessage = messages.invalid
                     const customMessagePath = `${path}.${ruleName}`
                     const customMessagePathAsterisk = `${path.replace(/\.\d+\./, '.*.')}.${ruleName}`
@@ -104,6 +104,7 @@ export default async function validate<D extends Data>(rules: Rules, data: D) {
                             value,
                             args: ruleArgs,
                             data,
+                            extra: valid.extra,
                         })
                 }
             }

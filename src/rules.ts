@@ -1,4 +1,4 @@
-import type { RuleFunction } from './types'
+import type { RuleFunction, RuleReturn } from './types'
 import { empty, getValue } from './utils'
 const rules = {
     /**
@@ -7,19 +7,21 @@ const rules = {
     * The value is null or undefined, an empty string (''), an empty array ([]), an empty object ({}).
     */
     required({ value }) {
-        return !empty(value)
+        const pass = !empty(value)
+        return { pass }
     },
     /**
      * The field under validation must be present and not empty if the anotherfield field is equal to any value.
      */
     required_if({ value, data, args }) {
         if (!empty(value)) {
-            return true
+            return { pass: true }
         }
         const field = (args as string).split(',')
         const key = field[0]
         const val = field[1]
-        return getValue(key, data) !== val
+        const pass = getValue(key, data) !== val
+        return { pass }
     },
     /**
      * The field under validation must be present and not empty unless the anotherfield field is equal to any value.
@@ -29,24 +31,17 @@ const rules = {
         const key = field[0]
         const val = field[1]
         if (getValue(key, data) === val) {
-            return true
+            return { pass: true }
         }
-        return !empty(value)
+        const pass = !empty(value)
+        return { pass }
     },
     /**
      * The field under validation must be a number or a numeric string.
      */
     numeric({ value }) {
-        return /^[+-]?([0-9]*[.])?[0-9]+$/.test(value as string)
-        // if (typeof value === 'number' && !isNaN(value)) {
-        //     return true
-        // }
-        // else if (typeof value === 'string' && !isNaN(parseFloat(value)) && parseFloat(value).toString() === value) {
-        //     return true
-        // }
-        // else {
-        //     return false
-        // }
+        const pass = /^[+-]?([0-9]*[.])?[0-9]+$/.test(value as string)
+        return { pass }
     },
     /**
      * The field under validation must have a minimum value.
@@ -57,16 +52,17 @@ const rules = {
     min({ value, args }) {
         const minLength = args as number
         if (typeof value === 'string') {
-            return this.numeric({ value, data: {} }) ? value as unknown as number >= minLength : value.length >= minLength
+            const isNumeric = this.numeric({ value, data: {} }) as RuleReturn
+            return { pass: isNumeric.pass ? value as unknown as number >= minLength : value.length >= minLength }
         }
         else if (typeof value === 'number') {
-            return value >= minLength
+            return { pass: value >= minLength }
         }
         else if (Array.isArray(value)) {
-            return value.length >= minLength
+            return { pass: value.length >= minLength }
         }
         else {
-            return false
+            return { pass: false }
         }
     },
     /**
@@ -78,16 +74,17 @@ const rules = {
     max({ value, args }) {
         const maxLength = args as number
         if (typeof value === 'string') {
-            return this.numeric({ value, data: {} }) ? value as unknown as number <= maxLength : value.length <= maxLength
+            const isNumeric = this.numeric({ value, data: {} }) as RuleReturn
+            return { pass: isNumeric.pass ? value as unknown as number <= maxLength : value.length <= maxLength }
         }
         else if (typeof value === 'number') {
-            return value <= maxLength
+            return { pass: value <= maxLength }
         }
         else if (Array.isArray(value)) {
-            return value.length <= maxLength
+            return { pass: value.length <= maxLength }
         }
         else {
-            return false
+            return { pass: false }
         }
     },
     /**
@@ -95,20 +92,20 @@ const rules = {
      */
     alpha({ value }) {
         if (typeof value !== 'string') {
-            return false
+            return { pass: false }
         }
-        const lettersOnly = /^[a-zA-Z]+$/.test(value)
-        return lettersOnly
+        const pass = /^[a-zA-Z]+$/.test(value)
+        return { pass }
     },
     /**
      * The field under this rule must be entirely alpha-numeric characters.
      */
     alpha_num({ value }) {
         if (typeof value !== 'string') {
-            return false
+            return { pass: false }
         }
-        const alphaNumeric = /^[a-zA-Z0-9]+$/.test(value)
-        return alphaNumeric
+        const pass = /^[a-zA-Z0-9]+$/.test(value)
+        return { pass }
     },
     /**
      * The field under validation must be included in the given list of values
@@ -116,7 +113,8 @@ const rules = {
     in({ value, args }) {
         const array = (args as string).split(',')
         const index = array.indexOf(`${value}`)
-        return index !== -1
+        const pass = index !== -1
+        return { pass }
     },
     /**
      * The field under validation must not be included in the given list of values.
@@ -124,33 +122,38 @@ const rules = {
     not_in({ value, args }) {
         const array = (args as string).split(',')
         const index = array.indexOf(`${value}`)
-        return index === -1
+        const pass = index === -1
+        return { pass }
     },
     /**
      * The field under validation must be formatted as an email address.
      */
     email({ value }) {
         const emailRegex = /^[a-z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)*$/i
-        return emailRegex.test(value as string)
+        const pass = emailRegex.test(value as string)
+        return { pass }
     },
     /**
      * The field under validation must be a valid URL.
      */
     url({ value }) {
         const urlRegex = /https?:\/\/(www\.)?([-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-z]{2,63}|localhost)\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/i
-        return urlRegex.test(value as string)
+        const pass = urlRegex.test(value as string)
+        return { pass }
     },
     /**
      * The given field must match the field under validation.
      */
     same({ value, data, args }) {
-        return getValue(args as string, data) === value
+        const pass = getValue(args as string, data) === value
+        return { pass }
     },
     /**
      * The field under validation must have a different value than field.
      */
     different({ value, data, args }) {
-        return getValue(args as string, data) !== value
+        const pass = getValue(args as string, data) !== value
+        return { pass }
     },
     /**
      * The field under validation must start with the given value or one of the given values (separated by comma).
@@ -158,10 +161,10 @@ const rules = {
     starts_with({ value, args }) {
         for (const arg of (args as string).split(',')) {
             if ((value as string).startsWith(arg)) {
-                return true
+                return { pass: true }
             }
         }
-        return false
+        return { pass: false }
     },
     /**
      * The field under validation must end with the given value or one of the given values (separated by comma).
@@ -169,10 +172,10 @@ const rules = {
     ends_with({ value, args }) {
         for (const arg of (args as string).split(',')) {
             if ((value as string).endsWith(arg)) {
-                return true
+                return { pass: true }
             }
         }
-        return false
+        return { pass: false }
     },
     /**
      * The field under validation must be a valid boolean representation.
@@ -182,13 +185,13 @@ const rules = {
         const type = typeof value
         switch (type) {
             case 'boolean':
-                return true
+                return { pass: true }
             case 'number':
-                return [0, 1].includes(value as number)
+                return { pass: [0, 1].includes(value as number) }
             case 'string':
-                return ['0', '1'].includes(value as string)
+                return { pass: ['0', '1'].includes(value as string) }
             default:
-                return false
+                return { pass: false }
         }
     },
 } satisfies Record<string, RuleFunction>

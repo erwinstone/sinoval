@@ -1,3 +1,6 @@
+v1.0.7
+ - Rule function must be return `{ pass: boolean, extra?: Record<string, any> }`
+
 v1.0.6
  - Fix readme
 

@@ -138,17 +138,24 @@ sinoval.setRule({
         const table = argv[0]
         const field = argv[1]
         const exist = await db(table).where(field, value).first()
-        return exist !== undefined
+        return { pass: exist !== undefined }
     },
-    uppercase: ({ value }) => value === value.toUpperCase(),
+    uppercase: ({ value }) => {
+        return { pass: value === value.toUpperCase() }
+    },
     archive: ({ value }) => {
         const extensions = ['.7z', '.rar', '.tar.gz', '.zip']
         for (const ext of extensions) {
             if (value.endsWith(ext)) {
-                return true
+                return { pass: true }
             }
         }
-        return false
+        return {
+            pass: false,
+            extra: {
+                extensions: extensions.join(', ')
+            }
+        }
     },
 })
 const rules = {
@@ -162,6 +169,7 @@ const rules = {
 ```javascript
 sinoval.setMessage({
     'required': ({ attribute }) => `The ${attribute} field cannot be empty.`,
+    'archive': ({ attribute, extra }) => `The ${attribute} must be an archive file of the allowed types: ${extra.extensions} .`,
     'email.required': 'We need to know your email address!',
 })
 ```
