@@ -1,3 +1,6 @@
+v1.0.8
+ - The data returned is now filled in by default
+
 v1.0.7
  - Rule function must be return `{ pass: boolean, extra?: Record<string, any> }`
 

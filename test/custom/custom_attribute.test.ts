@@ -15,6 +15,9 @@ test('"zip" to "zip code"', async () => {
             address: 'The address field is required.',
             zip: 'The zip code field is required.',
         },
-        data: {},
+        data: {
+            address: null,
+            zip: null,
+        },
     })
 })

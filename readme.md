@@ -37,6 +37,8 @@ const rules = {
 const data = {}
 
 const validator = await sinoval.validate(rules, data)
+
+console.log(validator)
 ```
 
 ## Available rules

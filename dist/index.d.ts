@@ -7,14 +7,6 @@ declare const sinoval: {
     setMessage: (customMessages: Record<string, import("./types").MessageFunction>) => void;
     setAttribute: (customAttributes: Record<string, string>) => void;
     rules: typeof import("./rules").default;
-    utils: {
-        empty: typeof import("./utils").empty;
-        getValue: typeof import("./utils").getValue;
-        getValueBetweenDots: typeof import("./utils").getValueBetweenDots;
-        isPathInItems: typeof import("./utils").isPathInItems;
-        splitStringByCase: typeof import("./utils").splitStringByCase;
-        convertToReadableFieldNames: typeof import("./utils").convertToReadableFieldNames;
-        getCustomAttribute: typeof import("./utils").getCustomAttribute;
-    };
+    utils: typeof import("./utils").default;
 };
 export default sinoval;

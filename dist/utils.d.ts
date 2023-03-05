@@ -58,6 +58,10 @@ export declare function getCustomAttribute(path: string, customAttributes: Recor
  * Defines a new property directly on an object or modifies an existing property on an object,
  */
 export declare function defineProperties(obj: unknown, properties: Record<any, any>): void;
+/**
+Transforms an array of data with nested paths to a multidimensional array.
+*/
+export declare function transformData(src: Items[]): any;
 declare const utils: {
     empty: typeof empty;
     getValue: typeof getValue;
@@ -66,5 +70,6 @@ declare const utils: {
     splitStringByCase: typeof splitStringByCase;
     convertToReadableFieldNames: typeof convertToReadableFieldNames;
     getCustomAttribute: typeof getCustomAttribute;
+    transformData: typeof transformData;
 };
 export default utils;

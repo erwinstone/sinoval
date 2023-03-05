@@ -8,12 +8,17 @@ export interface RuleParams {
     data: Data;
     args?: unknown;
 }
-export type RuleFunction = (params: RuleParams) => Promise<boolean> | boolean;
+export interface RuleReturn {
+    pass: boolean;
+    extra?: Record<string, any>;
+}
+export type RuleFunction = (params: RuleParams) => Promise<RuleReturn> | RuleReturn;
 export interface MessageParams {
     value: unknown;
     data: Data;
     args?: unknown;
     attribute: string;
+    extra?: Record<string, any>;
 }
 export type MessageFunction = string | ((params: MessageParams) => Promise<string> | string);
 export interface ValidatorConfig {

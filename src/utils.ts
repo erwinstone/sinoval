@@ -135,6 +135,38 @@ export function defineProperties(obj: unknown, properties: Record<any, any>) {
     }
     Object.defineProperties(obj, properties)
 }
+/**
+Transforms an array of data with nested paths to a multidimensional array.
+*/
+export function transformData(src: Items[]): any {
+    const result: any = {}
+    src.forEach(({ path, value }) => {
+        const pathSegments = path.split('.')
+        let current = result
+        for (let i = 0; i < pathSegments.length; i++) {
+            const pathSegment = pathSegments[i]
+            if (i === pathSegments.length - 1) {
+                if (pathSegment.match(/^\d+$/)) {
+                    if (!Array.isArray(current)) {
+                        current = []
+                    }
+                    const index = parseInt(pathSegment)
+                    current[index] = { ...current[index], product_id: value }
+                }
+                else {
+                    current[pathSegment] = value === undefined ? null : value
+                }
+            }
+            else {
+                if (!current[pathSegment]) {
+                    current[pathSegment] = pathSegments[i + 1].match(/^\d+$/) ? [] : {}
+                }
+                current = current[pathSegment]
+            }
+        }
+    })
+    return result
+}
 const utils = {
     empty,
     getValue,
@@ -143,5 +175,6 @@ const utils = {
     splitStringByCase,
     convertToReadableFieldNames,
     getCustomAttribute,
+    transformData,
 }
 export default utils

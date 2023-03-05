@@ -3,7 +3,7 @@ import config from './config'
 import rules from './rules'
 import messages from './messages'
 import attributes from './attributes'
-import { defineProperties, empty, getCustomAttribute, getValue, getValueBetweenDots, isPathInItems } from './utils'
+import { defineProperties, empty, getCustomAttribute, getValue, getValueBetweenDots, isPathInItems, transformData } from './utils'
 import type { Data, Items, MessageFunction, RuleFunction, RuleReturn, Rules, ValidatorConfig } from './types'
 export const setConfig = (customConfigs: Partial<ValidatorConfig>) => {
     defineProperties(config, customConfigs)
@@ -111,5 +111,5 @@ export default async function validate<D extends Data>(rules: Rules, data: D) {
         }
     }
     const pass = Object.keys(errors).length === 0
-    return { pass, errors, data }
+    return { pass, errors, data: transformData(items) }
 }

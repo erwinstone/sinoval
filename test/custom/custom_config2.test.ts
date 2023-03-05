@@ -15,6 +15,9 @@ test('custom convertToReadableFieldNamesFunction', async () => {
             firstName: 'The FIRSTNAME field is required.',
             lastName: 'The LASTNAME field is required.',
         },
-        data: {},
+        data: {
+            firstName: null,
+            lastName: null,
+        },
     })
 })

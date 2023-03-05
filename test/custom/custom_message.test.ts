@@ -18,6 +18,10 @@ test('required message', async () => {
             username: 'The username field cannot be empty.',
             email: 'We need to know your email address!',
         },
-        data: {},
+        data: {
+            name: null,
+            username: null,
+            email: null,
+        },
     })
 })

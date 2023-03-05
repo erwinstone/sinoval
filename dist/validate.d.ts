@@ -6,5 +6,5 @@ export declare const setAttribute: (customAttributes: Record<string, string>) =>
 export default function validate<D extends Data>(rules: Rules, data: D): Promise<{
     pass: boolean;
     errors: Record<string, string>;
-    data: D;
+    data: any;
 }>;
