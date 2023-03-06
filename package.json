@@ -1,7 +1,7 @@
 {
     "name": "sinoval",
     "type": "module",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "description": "A simple and easy-to-use node.js validator",
     "author": "Erwin Stone <erwinstone@pm.me>",
     "license": "MIT",

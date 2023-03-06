@@ -1,3 +1,6 @@
+v1.0.9
+ - Add "parseNumeric" option. Specifies whether input strings that are numeric should be converted to a numeric type
+
 v1.0.8
  - The data returned is now filled in by default
 

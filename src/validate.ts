@@ -68,11 +68,16 @@ export default async function validate<D extends Data>(rules: Rules, data: D) {
         }
     }
     const errors = {} as Record<string, string>
-    for (const item of items) {
+    for (const [index, item] of Object.entries(items)) {
         const { path, rules, value } = item
         for (const rule of rules.split(config.ruleSeparator)) {
             const [ruleName, ruleArgs] = rule.split(':')
             if (!(path in errors) && ruleName in validator) {
+                if (config.parseNumeric) {
+                    if (ruleName === 'numeric' && !Number.isNaN(parseFloat(value))) {
+                        items.at(index as unknown as number)!.value = parseFloat(value)
+                    }
+                }
                 let valid: RuleReturn = { pass: false }
                 if (!ruleName.startsWith('required') && empty(value)) {
                     valid = { pass: true }

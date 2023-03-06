@@ -184,37 +184,36 @@ sinoval.setAttribute({
 ```
 
 ## Configuration
+| Key | Type | Default |
+| :--------------- | :--------------: | ---------------: |
+| convertToReadableFieldNames  | boolean  |  `true` |
+| convertToReadableFieldNamesFunction  | (fieldName: any) => string  |  sinoval.utils.convertToReadableFieldNames |
+| ruleSeparator  | string  |  `\|` |
+| parseNumeric  | boolean  |  `true` |
+
 ```javascript
 // Example
-console.log(await sinoval.validate({ firstName: 'required|min:2'}, {}))
-// Will produce:
-// {
-//     ...
-//     errors: {
-//         firstName: 'The first name field is required.'
-//     },
-// }
 sinoval.setConfig({
     convertToReadableFieldNames: false,
-    ruleSeparator: '&',
-})
-console.log(await sinoval.validate({ firstName: 'required&min:2'}, {}))
-// Will produce:
-// {
-//     ...
-//     errors: {
-//         firstName: 'The firstName field is required.'
-//     },
-// }
-sinoval.setConfig({
     convertToReadableFieldNamesFunction: fieldName => fieldName.toUpperCase(),
+    ruleSeparator: '&',
+    parseNumeric: false,
 })
-console.log(await sinoval.validate({ firstName: 'required|min:2'}, {}))
+console.log(await sinoval.validate({
+    firstName: 'required&min:2',
+    age: 'required&numeric',
+}, {
+    age: '30',
+}))
 // Will produce:
 // {
 //     ...
 //     errors: {
 //         firstName: 'The FIRSTNAME field is required.'
+//     },
+//     data: {
+//         firstName: null,
+//         age: '30',
 //     },
 // }
 ```

@@ -4,5 +4,6 @@ const config: ValidatorConfig = {
     convertToReadableFieldNames: true,
     convertToReadableFieldNamesFunction: convertToReadableFieldNames,
     ruleSeparator: '|',
+    parseNumeric: true,
 }
 export default config

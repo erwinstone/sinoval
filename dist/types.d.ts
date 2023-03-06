@@ -25,6 +25,7 @@ export interface ValidatorConfig {
     convertToReadableFieldNames: boolean;
     ruleSeparator: string;
     convertToReadableFieldNamesFunction: (fieldName: any) => string;
+    parseNumeric: boolean;
 }
 export type Rules = Record<string, string>;
 export type Data = Record<string, any>;
