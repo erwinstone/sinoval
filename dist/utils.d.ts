@@ -62,6 +62,12 @@ export declare function defineProperties(obj: unknown, properties: Record<any, a
 Transforms an array of data with nested paths to a multidimensional array.
 */
 export declare function transformData(src: Items[]): any;
+/**
+Convert a file size string with unit to bytes.
+@param {string} size - The file size string with unit, e.g. "1.5MB".
+@returns {number} The size in bytes.
+*/
+export declare function fileSizeToBytes(size: string): number;
 declare const utils: {
     empty: typeof empty;
     getValue: typeof getValue;
@@ -71,5 +77,6 @@ declare const utils: {
     convertToReadableFieldNames: typeof convertToReadableFieldNames;
     getCustomAttribute: typeof getCustomAttribute;
     transformData: typeof transformData;
+    fileSizeToBytes: typeof fileSizeToBytes;
 };
 export default utils;

@@ -44,6 +44,12 @@ declare const rules: {
         pass: boolean;
     };
     /**
+     * The field under validation must be less than or equal to a maximum file size.
+     */
+    max_filesize({ value, args }: import("./types").RuleParams): {
+        pass: boolean;
+    };
+    /**
      * The field under this rule must be entirely alphabetic characters.
      */
     alpha({ value }: import("./types").RuleParams): {

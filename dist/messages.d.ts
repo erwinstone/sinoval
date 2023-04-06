@@ -6,6 +6,7 @@ declare const messages: {
     numeric({ attribute }: import("./types").MessageParams): string;
     min({ attribute, value, args }: import("./types").MessageParams): string;
     max({ attribute, value, args }: import("./types").MessageParams): string;
+    max_filesize({ attribute, args }: import("./types").MessageParams): string;
     alpha({ attribute }: import("./types").MessageParams): string;
     alpha_num({ attribute }: import("./types").MessageParams): string;
     in({ attribute }: import("./types").MessageParams): string;
