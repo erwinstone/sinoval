@@ -1,5 +1,6 @@
 import rules from './rules'
 import type { MessageFunction } from './types'
+
 const messages = {
     invalid({ attribute }) {
         return `The ${attribute} field is invalid.`
@@ -33,6 +34,9 @@ const messages = {
             return `The ${attribute} field must not have more than ${args} items.`
         }
         return `The ${attribute} field must not be greater than ${args} characters.`
+    },
+    max_filesize({ attribute, args }) {
+        return `The ${attribute} field must not be greater than ${args}.`
     },
     alpha({ attribute }) {
         return `The ${attribute} field must only contain letters.`

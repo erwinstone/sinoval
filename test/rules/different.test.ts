@@ -1,6 +1,7 @@
 import { expect, test } from 'vitest'
 import type { Rules } from '../../src/index'
 import sinoval from '../../src/index'
+
 const rules: Rules = {
     old_password: 'required',
     new_password: 'different:old_password',

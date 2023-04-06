@@ -5,16 +5,17 @@ import messages from './messages'
 import attributes from './attributes'
 import { defineProperties, empty, getCustomAttribute, getValue, getValueBetweenDots, isPathInItems, transformData } from './utils'
 import type { Data, Items, MessageFunction, RuleFunction, RuleReturn, Rules, ValidatorConfig } from './types'
-export const setConfig = (customConfigs: Partial<ValidatorConfig>) => {
+
+export function setConfig(customConfigs: Partial<ValidatorConfig>) {
     defineProperties(config, customConfigs)
 }
-export const setRule = (customRules: Record<string, RuleFunction>) => {
+export function setRule(customRules: Record<string, RuleFunction>) {
     defineProperties(rules, customRules)
 }
-export const setMessage = (customMessages: Record<string, MessageFunction>) => {
+export function setMessage(customMessages: Record<string, MessageFunction>) {
     defineProperties(messages, customMessages)
 }
-export const setAttribute = (customAttributes: Record<string, string>) => {
+export function setAttribute(customAttributes: Record<string, string>) {
     defineProperties(attributes, customAttributes)
 }
 const validator = rules

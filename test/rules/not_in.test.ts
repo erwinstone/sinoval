@@ -1,6 +1,7 @@
 import { expect, test } from 'vitest'
 import type { Rules } from '../../src/index'
 import sinoval from '../../src/index'
+
 const rules: Rules = {
     value: 'not_in:red,green,blue',
 }

@@ -1,6 +1,7 @@
 import { expect, test } from 'vitest'
 import type { Rules } from '../../src/index'
 import sinoval from '../../src/index'
+
 sinoval.setConfig({
     convertToReadableFieldNamesFunction: fieldName => (fieldName as string).toUpperCase(),
 })

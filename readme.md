@@ -86,6 +86,12 @@ console.log(validator)
 
     For an array, size corresponds to the `length` of the array.
 
+ - **max_filesize:value**
+
+    The field under validation must be less than or equal to a maximum file size.
+
+    The value must be a string with a unit, e.g., "1.5MB".
+
  - **alpha**
 
     The field under this rule must be entirely alphabetic characters.

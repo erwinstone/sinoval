@@ -3,15 +3,15 @@ import type { Rules } from '../../src/index'
 import sinoval from '../../src/index'
 
 const rules: Rules = {
-    value: 'starts_with:/,#',
+    value: 'max_filesize:2MB',
 }
 const passed = [
-    { value: '/' },
-    { value: '/profile' },
-    { value: '#setting-collapse' },
+    { value: 2000000 },
+    { value: 1000000 },
 ]
 const failed = [
-    { value: 'http://example.com' },
+    { value: 2000001 },
+    { value: 3000000 },
 ]
 for (const value of passed) {
     test(JSON.stringify(value), async () => {

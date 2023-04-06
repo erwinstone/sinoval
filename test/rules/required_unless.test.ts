@@ -1,6 +1,7 @@
 import { expect, test } from 'vitest'
 import type { Rules } from '../../src/index'
 import sinoval from '../../src/index'
+
 const rules: Rules = {
     attendance_type: 'required',
     location: 'required_unless:attendance_type,online',

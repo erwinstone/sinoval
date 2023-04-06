@@ -1,5 +1,6 @@
 import type { RuleFunction, RuleReturn } from './types'
-import { empty, getValue } from './utils'
+import { empty, fileSizeToBytes, getValue } from './utils'
+
 const rules = {
     /**
     * The field under validation must be present in the input data and not empty.
@@ -86,6 +87,13 @@ const rules = {
         else {
             return { pass: false }
         }
+    },
+    /**
+     * The field under validation must be less than or equal to a maximum file size.
+     */
+    max_filesize({ value, args }) {
+        const maxLength = fileSizeToBytes(args as string)
+        return { pass: value as unknown as number <= maxLength }
     },
     /**
      * The field under this rule must be entirely alphabetic characters.

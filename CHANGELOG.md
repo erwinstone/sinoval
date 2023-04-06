@@ -1,3 +1,6 @@
+v1.0.10
+ - Add "max_filesize" rule
+
 v1.0.9
  - Add "parseNumeric" option. Specifies whether input strings that are numeric should be converted to a numeric type
 

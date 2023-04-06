@@ -1,6 +1,7 @@
 import { expect, test } from 'vitest'
 import type { Rules } from '../../src/index'
 import sinoval from '../../src/index'
+
 sinoval.setMessage({
     'required': ({ attribute }) => `The ${attribute} field cannot be empty.`,
     'email.required': 'We need to know your email address!',

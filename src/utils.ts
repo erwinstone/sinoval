@@ -167,6 +167,21 @@ export function transformData(src: Items[]): any {
     })
     return result
 }
+/**
+Convert a file size string with unit to bytes.
+@param {string} size - The file size string with unit, e.g. "1.5MB".
+@returns {number} The size in bytes.
+*/
+export function fileSizeToBytes(size: string): number {
+    const units = {
+        B: 1,
+        KB: 1000,
+        MB: 1000000,
+        GB: 1000000000,
+    }
+    const [num, unit] = size.split(/(?<=\d)(?=[A-Z])/) // split string into number and unit
+    return parseFloat(num) * units[unit]
+}
 const utils = {
     empty,
     getValue,
@@ -176,5 +191,6 @@ const utils = {
     convertToReadableFieldNames,
     getCustomAttribute,
     transformData,
+    fileSizeToBytes,
 }
 export default utils
